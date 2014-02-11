@@ -57,6 +57,11 @@ namespace WpfThreeStrikes.Model
             return GetEnumerator();
         }
 
+        public void PutBack(Disk disk)
+        {
+            Add(disk);
+        }
+
         public void Add(Disk item)
         {
             Disks.Add(item);

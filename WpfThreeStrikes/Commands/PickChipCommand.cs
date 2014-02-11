@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 using WpfThreeStrikes.Model;
+using WpfThreeStrikes.View;
 using WpfThreeStrikes.ViewModel;
 
 namespace WpfThreeStrikes.Commands
@@ -31,17 +35,23 @@ namespace WpfThreeStrikes.Commands
             Disk pickedDisk = viewModel.Player.PickOne(viewModel.Bag);
             if (pickedDisk as Strike != null)
             {
-                viewModel.Player.StrikeCount++;
+                viewModel.StrikeCount++;
+                if (viewModel.StrikeCount <= 3)
+                {
+                    AlertView view = new AlertView(2500);
+                    view.DataContext = new AlertViewModel(viewModel.StrikeCount);
+                    view.ShowDialog();
+                }
+                    
                 return;
             }
 
             
             viewModel.Player.OnHand = (NumberDisk) pickedDisk;
-            
-
 
         }
 
+        
         public event EventHandler CanExecuteChanged
         {
             add { CommandManager.RequerySuggested += value; }

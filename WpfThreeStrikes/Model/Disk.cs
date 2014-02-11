@@ -10,7 +10,7 @@ namespace WpfThreeStrikes.Model
     {
     }
 
-    public class NumberDisk : Disk
+    public sealed class NumberDisk : Disk
     {
         public int Value { get; private set; }
 
@@ -25,7 +25,7 @@ namespace WpfThreeStrikes.Model
         }
     }
 
-    public class Strike : Disk
+    public sealed class Strike : Disk
     {
         public override string ToString()
         {

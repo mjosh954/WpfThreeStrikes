@@ -32,11 +32,9 @@ namespace WpfThreeStrikes.Commands
             if (correct)
             {
                 viewModel.PrizePanel.SetCorrectPanel(selected);
-                // disable the button
-                // change the button
             }
 
-            viewModel.Player.OnHand = null;
+            viewModel.Player.PutBack(viewModel.Bag);
         }
 
         public event EventHandler CanExecuteChanged

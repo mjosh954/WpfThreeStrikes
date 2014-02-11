@@ -10,6 +10,13 @@ namespace WpfThreeStrikes.Model
     public class Player : INotifyPropertyChanged
     {
         private string name;
+        private NumberDisk onHand;
+
+        public Player(string name)
+        {
+            Name = name;
+        }
+
         public string Name
         {
             get
@@ -23,21 +30,8 @@ namespace WpfThreeStrikes.Model
             }
         }
 
-        private int strikeCount;
-        public int StrikeCount
-        {
-            get
-            {
-                return strikeCount;
-            }
-            set
-            {
-                strikeCount = value;
-                OnPropertyChanged();
-            }
-        }
+      
 
-        private NumberDisk onHand;
         public NumberDisk OnHand
         {
             get
@@ -51,22 +45,23 @@ namespace WpfThreeStrikes.Model
             }
         }
 
-        public Player(string name)
-        {
-            Name = name;
-        }
-
-        public override string ToString()
-        {
-            return Name;
-        }
-
         public Disk PickOne(Bag bag)
         {
             Disk d = bag.GetOneDisk();
             bag.Remove(d);
 
             return d;
+        }
+
+        public void PutBack(Bag bag)
+        {
+            bag.PutBack(OnHand);
+            OnHand = null;
+        }
+
+        public override string ToString()
+        {
+            return Name;
         }
 
         #region INotifyPropertyChanged
@@ -81,5 +76,7 @@ namespace WpfThreeStrikes.Model
         }
 
         #endregion
+
+       
     }
 }

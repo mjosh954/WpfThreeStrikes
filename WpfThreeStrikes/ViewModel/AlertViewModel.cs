@@ -1,57 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel;
 using WpfThreeStrikes.Annotations;
 
-namespace WpfThreeStrikes.Model
+namespace WpfThreeStrikes.ViewModel
 {
-    public class Prize : INotifyPropertyChanged
+    public class AlertViewModel : INotifyPropertyChanged
     {
-        private string name;
-        public string Name
+        private int strikeCount;
+
+        private int StrikeCount
         {
             get
             {
-                return name;
+                return strikeCount;
             }
             set
             {
-                name = value;
-                OnPropertyChanged();
+                strikeCount = value;
+                OnPropertyChanged(StrikeText);
             }
         }
 
-        private int value;
-        public int Value
+        public string StrikeText
         {
             get
             {
-                return value;
-            }
-            set
-            {
-                this.value = value;
-                OnPropertyChanged();
+                return string.Format("Strike {0}", StrikeCount);
             }
         }
 
-        public Prize(string name, int value)
+        public AlertViewModel(int strikeCount)
         {
-            Name = name;
-            Value = value;
-        }
-
-        public override string ToString()
-        {
-            return Name;
+            StrikeCount = strikeCount;
         }
 
         #region INotifyPropertyChanged
-       
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
@@ -59,7 +48,6 @@ namespace WpfThreeStrikes.Model
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-
         }
 
         #endregion

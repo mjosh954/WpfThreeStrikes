@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ControlTemplate x:Key="PickButton" TargetType="{x:Type Button}">
+        <Border Name="fondoboton"
+                Background="LightGray"
+                BorderBrush="DarkGray"
+                BorderThickness="5"
+                CornerRadius="10,0,10,0">
+            <ContentPresenter Name="contenido" Content="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}}" />
+        </Border>
+    </ControlTemplate>
+</ResourceDictionary>
