@@ -4,10 +4,6 @@
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              StartupUri="View\GameView.xaml">
     <Application.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Resources/ButtonDictionary.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+        <ResourceDictionary Source="/Resources/ButtonDictionary.xaml" />
     </Application.Resources>
 </Application>
