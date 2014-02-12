@@ -17,9 +17,18 @@ namespace WpfThreeStrikes.ViewModel
 
     public class StartViewModel : INotifyPropertyChanged
     {
-        private string playerName;
 
-        
+
+        private Player player;
+
+        public Player Player
+        {
+            get
+            {
+                return player;
+            }
+        }
+
 
         public ICommand StartGameCommand
         {
@@ -30,19 +39,12 @@ namespace WpfThreeStrikes.ViewModel
         public StartViewModel()
         {
             StartGameCommand = new StartGameCommand(this);
+            player = new Player();
+
         }
-        public string PlayerName
-        {
-            get
-            {
-                return playerName;
-            }
-            set
-            {
-                playerName = value;
-                OnPropertyChanged();
-            }
-        }
+
+
+        
 
 
         #region

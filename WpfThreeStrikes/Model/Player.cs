@@ -7,7 +7,7 @@ namespace WpfThreeStrikes.Model
 {
     
 
-    public class Player : INotifyPropertyChanged
+    public class Player : INotifyPropertyChanged, IDataErrorInfo
     {
         private string name;
         private NumberDisk onHand;
@@ -15,6 +15,11 @@ namespace WpfThreeStrikes.Model
         public Player(string name)
         {
             Name = name;
+        }
+
+        public Player()
+        {
+            
         }
 
         public string Name
@@ -77,6 +82,23 @@ namespace WpfThreeStrikes.Model
 
         #endregion
 
-       
+        #region IDataErrorInfo
+
+        public string this[string columnName]
+        {
+            get
+            {
+                if (columnName == "Name")
+                {
+                    Error = string.IsNullOrWhiteSpace(Name) ? "Must provide a name" : null;
+                }
+                return Error;
+
+            }
+        }
+
+        public string Error { get; private set; }
+
+        #endregion
     }
 }

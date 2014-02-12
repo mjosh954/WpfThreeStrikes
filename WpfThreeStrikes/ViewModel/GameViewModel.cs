@@ -6,9 +6,12 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Xml;
 using WpfThreeStrikes.Annotations;
 using WpfThreeStrikes.Commands;
 using WpfThreeStrikes.Model;
+using WpfThreeStrikes.Resources;
+using WpfThreeStrikes.View;
 
 namespace WpfThreeStrikes.ViewModel
 {
@@ -169,7 +172,6 @@ namespace WpfThreeStrikes.ViewModel
             get { return prize; }
         }
 
-
         public ICommand PickPanelCommand
         {
             get;
@@ -195,15 +197,100 @@ namespace WpfThreeStrikes.ViewModel
             }
         }
 
+        public string PlayerNameText
+        {
+            get
+            {
+                return string.Format("Welcome {0}", Player.Name);
+            }
+        }
+
         public GameViewModel(Player player)
         {
             this.player = player;
-            prize = new Prize("Car", 12345);
-            bag = new Bag(prize.Value);
-            prizePanel = new PrizePanel(this, prize.Value);
-
+            
+            StartNewGame();
             GrabChipCommand = new PickChipCommand(this);
             PickPanelCommand = new PanelSelectCommand(this);
+        }
+
+        private Prize GetRandomPrize()
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(Res.Prizes);
+            XmlNodeList prizes = doc.SelectNodes("//Prize");
+            List<Prize> Prizes = new List<Prize>();
+            foreach (XmlNode prize in prizes)
+            {
+                string prizeName = prize.FirstChild.InnerText;
+                string prizeValue = prize.LastChild.InnerText;
+                Prizes.Add(new Prize(prizeName, int.Parse(prizeValue)));
+            }
+
+            Random rand = new Random();
+            Prizes = Prizes.OrderBy(p => rand.Next()).ToList();
+
+            return Prizes.First();
+        }
+
+        public void GameOver(bool win)
+        {
+            EndGameView view = new EndGameView();
+            view.DataContext = new EndGameViewModel(win, prize, this);
+            view.ShowDialog();
+
+        }
+
+        public void ShowStrike()
+        {
+            AlertView view = new AlertView(2500);
+            view.DataContext = new AlertViewModel(strikeCount);
+            view.ShowDialog();
+        }
+
+        public void SelectPanel(int panelNum)
+        {
+            bool correct = PrizePanel.CheckSelectedPanel(Player.OnHand, panelNum);
+            if (!correct)
+            {
+
+                Player.PutBack(Bag);
+                return;
+                
+            }
+
+            PrizePanel.SetCorrectPanel(panelNum);
+            Player.OnHand = null;
+
+        }
+
+        public void PickFromBag()
+        {
+            Disk pickedDisk = Player.PickOne(Bag);
+            if (pickedDisk as Strike != null)
+            {
+                StrikeCount++;
+                if (StrikeCount < 3)
+                {
+                    ShowStrike();
+                    return;
+                }
+
+                // show game over view
+                GameOver(false);
+                return;
+            }
+
+            // set on hand to the number disk
+            Player.OnHand = (NumberDisk)pickedDisk;
+        }
+
+        public void StartNewGame()
+        {
+            prize = GetRandomPrize();
+            bag = new Bag(prize.Value);
+            prizePanel = new PrizePanel(this, prize.Value);
+            
         }
 
 

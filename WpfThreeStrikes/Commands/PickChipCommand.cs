@@ -31,24 +31,7 @@ namespace WpfThreeStrikes.Commands
 
         public void Execute(object parameter)
         {
-            
-            Disk pickedDisk = viewModel.Player.PickOne(viewModel.Bag);
-            if (pickedDisk as Strike != null)
-            {
-                viewModel.StrikeCount++;
-                if (viewModel.StrikeCount <= 3)
-                {
-                    AlertView view = new AlertView(2500);
-                    view.DataContext = new AlertViewModel(viewModel.StrikeCount);
-                    view.ShowDialog();
-                }
-                    
-                return;
-            }
-
-            
-            viewModel.Player.OnHand = (NumberDisk) pickedDisk;
-
+            viewModel.PickFromBag();
         }
 
         

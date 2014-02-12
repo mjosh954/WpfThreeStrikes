@@ -1,0 +1,54 @@
+﻿<Window x:Class="WpfThreeStrikes.View.EndGameView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="EndGameView"
+        Width="499.648"
+        Height="242.958"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None">
+    <Window.Background>
+        <RadialGradientBrush>
+            <GradientStop Offset="1" Color="#FF0B0844" />
+            <GradientStop Color="#FF2E2E96" />
+        </RadialGradientBrush>
+    </Window.Background>
+    <Grid>
+        <StackPanel Margin="10" Orientation="Vertical">
+            <Label x:Name="lblWinLost"
+                   Margin="10, 10"
+                   HorizontalContentAlignment="Center"
+                   Content="{Binding WinLoseText,
+                                     FallbackValue='You Win!',
+                                     TargetNullValue='Game Over'}"
+                   FontFamily="Showcard Gothic"
+                   FontSize="40"
+                   Foreground="WhiteSmoke" />
+            <Label x:Name="lblPrize"
+                   Margin="10, 10"
+                   HorizontalContentAlignment="Center"
+                   Content="{Binding PrizeWorth,
+                                     FallbackValue='PrizeValue',
+                                     TargetNullValue='PrizeValue'}"
+                   FontFamily="Tahoma"
+                   FontSize="20"
+                   Foreground="WhiteSmoke" />
+            <StackPanel Height="61"
+                        Margin="100,10"
+                        Orientation="Horizontal">
+                <Button x:Name="btnNewGame"
+                        Width="120"
+                        Margin="10"
+                        HorizontalAlignment="Center"
+                        Content="New Game"
+                        FontSize="20" Click="btnNewGame_Click" />
+                <Button x:Name="btnMain"
+                        Width="120"
+                        Margin="10"
+                        HorizontalAlignment="Center"
+                        Content="Main"
+                        FontSize="20" Click="btnMain_Click" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

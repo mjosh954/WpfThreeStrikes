@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Prizes>
+  <Prize>
+    <Name>2014 Mazda 6</Name>  
+    <Value>29675</Value>
+  </Prize>
+  <Prize>
+    <Name>All Inclusive Hawaiian Vacation</Name>  
+    <Value>10432</Value>
+  </Prize>
+  <Prize>
+    <Name>Fleetwood RV</Name>
+    <Value>65014</Value>
+  </Prize>
+</Prizes>

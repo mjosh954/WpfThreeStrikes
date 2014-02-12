@@ -27,14 +27,7 @@ namespace WpfThreeStrikes.Commands
 
         public void Execute(object parameter)
         {
-            int selected  = Convert.ToInt16(parameter);
-            bool correct = viewModel.PrizePanel.CheckSelectedPanel(viewModel.Player.OnHand, selected);
-            if (correct)
-            {
-                viewModel.PrizePanel.SetCorrectPanel(selected);
-            }
-
-            viewModel.Player.PutBack(viewModel.Bag);
+            viewModel.SelectPanel(Convert.ToInt32(parameter));
         }
 
         public event EventHandler CanExecuteChanged

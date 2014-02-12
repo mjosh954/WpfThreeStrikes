@@ -12,27 +12,33 @@ namespace WpfThreeStrikes.Commands
 {
     class StartGameCommand : ICommand
     {
-        private StartViewModel viewModel;
-
+        private readonly StartViewModel viewModel;
 
         public StartGameCommand(StartViewModel viewModel)
         {
             this.viewModel = viewModel;
-            
         }
+
+        #region ICommand
 
         public bool CanExecute(object parameter)
         {
-            return !string.IsNullOrEmpty(viewModel.PlayerName);
+            return string.IsNullOrEmpty(viewModel.Player.Error);
         }
 
         public void Execute(object parameter)
         {
             GameView view = new GameView();
-            view.DataContext = new GameViewModel(new Player(viewModel.PlayerName));
+            view.DataContext = new GameViewModel(viewModel.Player);
             view.ShowDialog();
         }
 
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
+
+        #endregion
     }
 }
