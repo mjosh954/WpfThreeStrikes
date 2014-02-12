@@ -34,7 +34,8 @@ namespace WpfThreeStrikes.View
         
         private void btnMain_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            Application.Current.Shutdown();
+
         }
     }
 }

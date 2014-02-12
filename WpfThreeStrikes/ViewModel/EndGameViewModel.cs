@@ -19,7 +19,7 @@ namespace WpfThreeStrikes.ViewModel
         {
             get
             {
-                return string.Format("Prize value: ${0}", prize.Value.ToString("N2"));
+                return string.Format("Prize value: ${0:N}", prize.Value);
             }
         }
 

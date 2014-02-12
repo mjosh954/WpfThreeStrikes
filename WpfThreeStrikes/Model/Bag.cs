@@ -12,6 +12,23 @@ namespace WpfThreeStrikes.Model
 {
     public sealed class Bag : ICollection<Disk>, INotifyPropertyChanged
     {
+
+        public int StrikeCount
+        {
+            get
+            {
+                return this.Count(d => d as Strike != null);
+            }
+        }
+
+        public int NumberCount
+        {
+            get
+            {
+                return this.Count(d => d as NumberDisk != null);
+            }
+        }
+
         private List<Disk> disks;
 
         private List<Disk> Disks

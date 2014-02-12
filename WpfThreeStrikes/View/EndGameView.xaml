@@ -48,7 +48,7 @@
                         Margin="10"
                         HorizontalAlignment="Center"
                         Click="btnMain_Click"
-                        Content="Main"
+                        Content="Done"
                         FontSize="20" />
             </StackPanel>
         </StackPanel>

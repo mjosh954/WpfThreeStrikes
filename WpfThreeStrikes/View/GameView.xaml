@@ -192,8 +192,6 @@
                        FontFamily="Meiryo UI"
                        FontSize="20"
                        Foreground="#FFECECEC" />
-
-
             </Grid>
         </StackPanel>
     </Grid>

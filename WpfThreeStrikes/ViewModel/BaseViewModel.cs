@@ -18,7 +18,7 @@ namespace WpfThreeStrikes.ViewModel
 
         #region BaseViewModel Commands
 
-        public class CloseCommand : ICommand
+        private class CloseCommand : ICommand
         {
             public bool CanExecute(object parameter)
             {

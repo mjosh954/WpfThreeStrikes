@@ -100,7 +100,7 @@ namespace WpfThreeStrikes.ViewModel
             {
                 return strikeCount;
             }
-            set
+            private set
             {
                 strikeCount = value;
                 OnPropertyChanged();
@@ -128,7 +128,6 @@ namespace WpfThreeStrikes.ViewModel
             {
                 startAlert = value;
                 OnPropertyChanged();
-                OnPropertyChanged(StrikeAlertText);
             }
         }
 
@@ -155,16 +154,31 @@ namespace WpfThreeStrikes.ViewModel
             {
                 return prizePanel;
             }
+            private set
+            {
+                prizePanel = value;
+                OnPropertyChanged();
+            }
         }
 
         public Bag Bag
         {
             get { return bag; }
+            private set
+            {
+                bag = value;
+                OnPropertyChanged();
+            }
         }
 
         public Prize Prize
         {
             get { return prize; }
+            set
+            {
+                prize = value;
+                OnPropertyChanged("PrizeText");
+            }
         }
 
         public ICommand PickPanelCommand
@@ -236,11 +250,7 @@ namespace WpfThreeStrikes.ViewModel
         public void GameOver(bool win)
         {
             EndGameView view = new EndGameView(win, prize, this);
-
-
-            view.Show();
-            CloseAction();
-
+            view.ShowDialog();
         }
 
         public void ShowStrike()
@@ -249,7 +259,7 @@ namespace WpfThreeStrikes.ViewModel
             {
                 DataContext = new AlertViewModel(strikeCount)
             };
-            view.ShowDialog();
+            view.Show();
         }
 
         public void SelectPanel(int panelNum)
@@ -257,7 +267,7 @@ namespace WpfThreeStrikes.ViewModel
             bool correct = PrizePanel.CheckSelectedPanel(Player.OnHand, panelNum);
             if (!correct)
             {
-
+                
                 Player.PutBack(Bag);
                 return;
             }
@@ -267,8 +277,6 @@ namespace WpfThreeStrikes.ViewModel
 
             if (CheckIfWon())
                 GameOver(true);
-            
-
         }
 
         private bool CheckIfWon()
@@ -285,6 +293,7 @@ namespace WpfThreeStrikes.ViewModel
 
             return false;
         }
+
 
         public void PickFromBag()
         {
@@ -309,9 +318,10 @@ namespace WpfThreeStrikes.ViewModel
 
         public void StartNewGame()
         {
-            prize = GetRandomPrize();
-            bag = new Bag(prize.Value);
-            prizePanel = new PrizePanel(this, prize.Value);
+            Prize = GetRandomPrize();
+            Bag = new Bag(prize.Value);
+            PrizePanel = new PrizePanel(this, prize.Value);
+            StrikeCount = 0;
         }
 
 

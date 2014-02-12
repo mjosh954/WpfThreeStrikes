@@ -9,7 +9,6 @@ namespace WpfThreeStrikes.Commands
         private readonly GameViewModel gameViewModel;
         private readonly EndGameViewModel endViewModel;
 
-
         public NewGameCommand(GameViewModel gameViewModel, EndGameViewModel endViewModel)
         {
             this.gameViewModel = gameViewModel;
