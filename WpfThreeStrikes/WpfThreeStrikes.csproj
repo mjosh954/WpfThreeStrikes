@@ -63,10 +63,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Res.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\EndGameViewModel.cs" />
     <Compile Include="ViewModel\StartViewModel.cs" />
     <Compile Include="View\EndGameView.xaml.cs">
       <DependentUpon>EndGameView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\HelpView.xaml.cs">
+      <DependentUpon>HelpView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\StartView.xaml.cs">
       <DependentUpon>StartView.xaml</DependentUpon>
@@ -112,6 +116,10 @@
       <DependentUpon>GameView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\HelpView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\StartView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

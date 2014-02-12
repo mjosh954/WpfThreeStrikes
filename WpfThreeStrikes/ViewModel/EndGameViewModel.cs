@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using WpfThreeStrikes.Commands;
 using WpfThreeStrikes.Model;
 
 namespace WpfThreeStrikes.ViewModel
 {
-    public class EndGameViewModel
+    public sealed partial class EndGameViewModel : BaseViewModel
     {
-        private bool win;
-        private Prize prize;
+        private readonly bool win;
+        private readonly Prize prize;
 
         public ICommand EndGameCommand
         {
@@ -40,7 +35,8 @@ namespace WpfThreeStrikes.ViewModel
         {
             this.win = win;
             this.prize = prize;
-            EndGameCommand = new NewGameCommand(viewModel);
+            EndGameCommand = new NewGameCommand(viewModel, this);
+            
         }
     }
 }

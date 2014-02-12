@@ -13,13 +13,10 @@ using WpfThreeStrikes.Model;
 namespace WpfThreeStrikes.ViewModel
 {
 
-    
-
-    public class StartViewModel : INotifyPropertyChanged
+    public partial class StartViewModel : BaseViewModel, INotifyPropertyChanged
     {
 
-
-        private Player player;
+        private readonly Player player;
 
         public Player Player
         {
@@ -29,21 +26,27 @@ namespace WpfThreeStrikes.ViewModel
             }
         }
 
-
         public ICommand StartGameCommand
         {
             get;
             private set;
         }
 
-        public StartViewModel()
+        public StartViewModel() 
         {
             StartGameCommand = new StartGameCommand(this);
             player = new Player();
-
         }
 
-
+        public void StartGame()
+        {
+            GameView view = new GameView();
+            GameViewModel vm = new GameViewModel(Player);
+            view.DataContext = vm;
+            if(vm.CloseAction == null)
+                vm.CloseAction = view.Close;
+            view.ShowDialog();
+        }
         
 
 

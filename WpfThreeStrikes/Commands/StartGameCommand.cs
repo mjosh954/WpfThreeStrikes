@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using WpfThreeStrikes.Model;
-using WpfThreeStrikes.View;
 using WpfThreeStrikes.ViewModel;
 
 namespace WpfThreeStrikes.Commands
@@ -28,9 +22,7 @@ namespace WpfThreeStrikes.Commands
 
         public void Execute(object parameter)
         {
-            GameView view = new GameView();
-            view.DataContext = new GameViewModel(viewModel.Player);
-            view.ShowDialog();
+            viewModel.StartGame();
         }
 
         public event EventHandler CanExecuteChanged

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfThreeStrikes.ViewModel;
 
 namespace WpfThreeStrikes.View
 {
@@ -19,16 +20,18 @@ namespace WpfThreeStrikes.View
     /// </summary>
     public partial class EndGameView : Window
     {
-        public EndGameView()
+
+
+        public EndGameView(bool win, Model.Prize prize, GameViewModel gameViewModel)
         {
             InitializeComponent();
+            EndGameViewModel vm = new EndGameViewModel(win, prize, gameViewModel);
+            DataContext = vm;
+            if(vm.CloseAction == null)
+                vm.CloseAction = Close;
         }
 
-        private void btnNewGame_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
+        
         private void btnMain_Click(object sender, RoutedEventArgs e)
         {
             Close();

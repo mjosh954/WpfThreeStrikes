@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using WpfThreeStrikes.ViewModel;
 
@@ -10,12 +6,14 @@ namespace WpfThreeStrikes.Commands
 {
     public class NewGameCommand : ICommand
     {
-        private GameViewModel viewModel;
-            
+        private readonly GameViewModel gameViewModel;
+        private readonly EndGameViewModel endViewModel;
 
-        public NewGameCommand(GameViewModel viewModel)
+
+        public NewGameCommand(GameViewModel gameViewModel, EndGameViewModel endViewModel)
         {
-            this.viewModel = viewModel;
+            this.gameViewModel = gameViewModel;
+            this.endViewModel = endViewModel;
         }
 
         public bool CanExecute(object parameter)
@@ -25,7 +23,9 @@ namespace WpfThreeStrikes.Commands
 
         public void Execute(object parameter)
         {
-            viewModel.StartNewGame();
+
+            gameViewModel.StartNewGame();
+            endViewModel.CloseAction();
         }
 
         public event EventHandler CanExecuteChanged;

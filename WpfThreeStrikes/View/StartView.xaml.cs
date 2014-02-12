@@ -29,9 +29,17 @@ namespace WpfThreeStrikes.View
             DataContext = new StartViewModel();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+
+        private void btnHelp_Click(object sender, RoutedEventArgs e)
+        {
+            HelpView view = new HelpView();
+            view.ShowDialog();
+        }
+
+        private void StartView1_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
+
     }
 }

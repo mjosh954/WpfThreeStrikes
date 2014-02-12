@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Xml;
 using WpfThreeStrikes.Annotations;
@@ -15,9 +14,9 @@ using WpfThreeStrikes.View;
 
 namespace WpfThreeStrikes.ViewModel
 {
-    public class GameViewModel : INotifyPropertyChanged
+    public class GameViewModel : BaseViewModel, INotifyPropertyChanged
     {
-        private Player player;
+        private readonly Player player;
         private Prize prize;
         private PrizePanel prizePanel;
         private Bag bag;
@@ -42,7 +41,6 @@ namespace WpfThreeStrikes.ViewModel
             }
            
         }
-
         public Panel Panel1
         {
             get
@@ -56,7 +54,6 @@ namespace WpfThreeStrikes.ViewModel
             }
 
         }
-
         public Panel Panel2
         {
             get
@@ -70,7 +67,6 @@ namespace WpfThreeStrikes.ViewModel
             }
 
         }
-
         public Panel Panel3
         {
             get
@@ -84,7 +80,6 @@ namespace WpfThreeStrikes.ViewModel
             }
 
         }
-
         public Panel Panel4
         {
             get
@@ -220,12 +215,17 @@ namespace WpfThreeStrikes.ViewModel
             doc.LoadXml(Res.Prizes);
             XmlNodeList prizes = doc.SelectNodes("//Prize");
             List<Prize> Prizes = new List<Prize>();
+
+            if(prizes == null)
+                throw new ArgumentNullException("No prizes in Prizes.xml");
+
             foreach (XmlNode prize in prizes)
             {
                 string prizeName = prize.FirstChild.InnerText;
                 string prizeValue = prize.LastChild.InnerText;
                 Prizes.Add(new Prize(prizeName, int.Parse(prizeValue)));
             }
+            
 
             Random rand = new Random();
             Prizes = Prizes.OrderBy(p => rand.Next()).ToList();
@@ -235,16 +235,20 @@ namespace WpfThreeStrikes.ViewModel
 
         public void GameOver(bool win)
         {
-            EndGameView view = new EndGameView();
-            view.DataContext = new EndGameViewModel(win, prize, this);
-            view.ShowDialog();
+            EndGameView view = new EndGameView(win, prize, this);
+
+
+            view.Show();
+            CloseAction();
 
         }
 
         public void ShowStrike()
         {
-            AlertView view = new AlertView(2500);
-            view.DataContext = new AlertViewModel(strikeCount);
+            AlertView view = new AlertView(2500)
+            {
+                DataContext = new AlertViewModel(strikeCount)
+            };
             view.ShowDialog();
         }
 
@@ -256,12 +260,30 @@ namespace WpfThreeStrikes.ViewModel
 
                 Player.PutBack(Bag);
                 return;
-                
             }
 
             PrizePanel.SetCorrectPanel(panelNum);
             Player.OnHand = null;
 
+            if (CheckIfWon())
+                GameOver(true);
+            
+
+        }
+
+        private bool CheckIfWon()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(panel0.ShownValue);
+            sb.Append(panel1.ShownValue);
+            sb.Append(panel2.ShownValue);
+            sb.Append(panel3.ShownValue);
+            sb.Append(panel4.ShownValue);
+
+            if (sb.ToString() == Prize.Value.ToString())
+                return true;
+
+            return false;
         }
 
         public void PickFromBag()
@@ -290,7 +312,6 @@ namespace WpfThreeStrikes.ViewModel
             prize = GetRandomPrize();
             bag = new Bag(prize.Value);
             prizePanel = new PrizePanel(this, prize.Value);
-            
         }
 
 

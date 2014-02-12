@@ -40,14 +40,16 @@
                         Width="120"
                         Margin="10"
                         HorizontalAlignment="Center"
+                        Command="{Binding EndGameCommand}"
                         Content="New Game"
-                        FontSize="20" Click="btnNewGame_Click" />
+                        FontSize="20" />
                 <Button x:Name="btnMain"
                         Width="120"
                         Margin="10"
                         HorizontalAlignment="Center"
+                        Click="btnMain_Click"
                         Content="Main"
-                        FontSize="20" Click="btnMain_Click" />
+                        FontSize="20" />
             </StackPanel>
         </StackPanel>
     </Grid>
