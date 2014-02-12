@@ -195,9 +195,9 @@ namespace WpfThreeStrikes.ViewModel
             }
         }
 
-        public GameViewModel()
+        public GameViewModel(Player player)
         {
-            player = new Player("Josh");
+            this.player = player;
             prize = new Prize("Car", 12345);
             bag = new Bag(prize.Value);
             prizePanel = new PrizePanel(this, prize.Value);

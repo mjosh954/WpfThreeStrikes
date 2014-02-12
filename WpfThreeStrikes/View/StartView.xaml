@@ -1,0 +1,22 @@
+﻿<Window x:Class="WpfThreeStrikes.View.StartView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="StartView" Height="259" Width="300"  ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" Background="#FF414852">
+    <Grid>
+        <StackPanel Margin="10" Orientation="Vertical">
+            <Label Height="51"
+    			VerticalAlignment="Top"
+    			HorizontalContentAlignment="Center"
+    			Content="Three Strikes"
+    			FontFamily="Lucida Calligraphy"
+    			FontSize="30"
+    			Foreground="White" VerticalContentAlignment="Center" />
+            <StackPanel Height="68" Margin="10,0" Orientation="Horizontal">
+                <Label Content="Name" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" />
+                <TextBox Text="{Binding Path=PlayerName, Mode=TwoWay}" TextWrapping="Wrap"  Width="169" Margin="10,21" VerticalContentAlignment="Center" />
+            </StackPanel>
+            <Button Height="30" Margin="10" Width="100" Command="{Binding StartGameCommand}">Play</Button>
+            <Button Height="30" Margin="10" Width="100" Click="Button_Click" >Exit</Button>
+        </StackPanel>
+    </Grid>
+</Window>

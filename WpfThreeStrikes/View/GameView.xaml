@@ -38,7 +38,8 @@
                   HorizontalAlignment="Left">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="18*" />
-                    <ColumnDefinition Width="587*" />
+                    <ColumnDefinition Width="294*" />
+                    <ColumnDefinition Width="293*"/>
                     <ColumnDefinition Width="17*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -53,7 +54,7 @@
                 <StackPanel Grid.Row="3"
                             Grid.Column="1"
                             Margin="87,10,87,10"
-                            Orientation="Horizontal">
+                            Orientation="Horizontal" Grid.ColumnSpan="2">
                     <Button Width="66"
                             Margin="10"
                             HorizontalContentAlignment="Center"
@@ -119,11 +120,11 @@
                                          TargetNullValue=Your hand is empty}"
                        FontFamily="Lucida Calligraphy"
                        FontSize="20"
-                       Foreground="White" />
+                       Foreground="White" Grid.ColumnSpan="2" />
                 <Label x:Name="lblStrikes"
                        Grid.Row="2"
                        Grid.Column="1"
-                       Margin="1,0,417,0"
+                       Margin="1,0,123.627,0"
                        VerticalContentAlignment="Center"
                        Background="Transparent"
                        Content="{Binding StrikeCountText,
@@ -149,11 +150,11 @@
                         Command="{Binding GrabChipCommand}"
                         Content="Pick"
                         FontFamily="Lucida Calligraphy"
-                        FontSize="40" />
+                        FontSize="40" Grid.ColumnSpan="2" />
                 <Label x:Name="lblPrize"
                        Grid.Row="1"
                        Grid.Column="1"
-                       Margin="1,0,417,0"
+                       Margin="1,0,123.627,0"
                        VerticalContentAlignment="Center"
                        Background="Transparent"
                        Content="{Binding PrizeText,
