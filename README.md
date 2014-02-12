@@ -1,0 +1,4 @@
+WpfThreeStrikes
+===============
+
+Using MVVM pattern
