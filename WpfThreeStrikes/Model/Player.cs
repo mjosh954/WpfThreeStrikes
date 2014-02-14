@@ -12,11 +12,18 @@ namespace WpfThreeStrikes.Model
         private string name;
         private NumberDisk onHand;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Player"/> class.
+        /// </summary>
+        /// <param name="name">The name.</param>
         public Player(string name)
         {
             Name = name;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Player"/> class.
+        /// </summary>
         public Player()
         {
             
