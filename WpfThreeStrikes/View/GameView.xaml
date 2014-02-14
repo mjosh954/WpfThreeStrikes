@@ -173,7 +173,8 @@
                        Background="Transparent"
                        Content="{Binding PrizeText,
                                          FallbackValue=Prize,
-                                         TargetNullValue=Prize}"
+                                         TargetNullValue=Prize, 
+                                         StringFormat='Prize: {0}'}"
                        FontFamily="Meiryo UI"
                        FontSize="20"
                        Foreground="#FFECECEC" />
@@ -188,6 +189,7 @@
                        HorizontalContentAlignment="Center"
                        VerticalContentAlignment="Center"
                        Content="{Binding PlayerNameText,
+                            StringFormat='Welcome {0}',
                                          FallbackValue=PlayerName}"
                        FontFamily="Meiryo UI"
                        FontSize="20"
